@@ -26,7 +26,10 @@ function DocumentItem(props) {
         },
       }}
       onClick={() => {
-        history.push(url);
+        history.push({
+          pathname: url,
+          state: { fromExplorePage: true },
+        });
       }}
     >
       <Box
@@ -39,7 +42,12 @@ function DocumentItem(props) {
       </Box>
 
       <Card width={[1, 2 / 3, 3 / 4]}>
-        <Link as={RouterLink} to={url} noUnderline>
+        <Link
+          as={RouterLink}
+          to={url}
+          onClick={(evt) => evt.preventDefault()} // let parent handler perform navigation
+          noUnderline
+        >
           <Heading>{title}</Heading>
         </Link>
 

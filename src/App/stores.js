@@ -1,7 +1,4 @@
-import { init } from 'search-api-adapter';
 import create from 'zustand';
-
-import filterables from '../filterables.json';
 
 // const preset =
 //   localStorage.getItem('isDark') === 'true' ||
@@ -23,6 +20,11 @@ export const useAppStore = create((set, get) => ({
   },
 }));
 
-export const useSearchStore = create((set) =>
-  init(filterables, { setter: set, debounce: 50 })
-);
+export const useSearchStore = create((set, get) => ({
+  search: '',
+  setSearch: (search) => {
+    if (search !== get().search) {
+      set({ search });
+    }
+  },
+}));
