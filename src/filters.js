@@ -4,6 +4,16 @@ import filterables from './filterables.json';
 import { useQuery, JOIN_CHAR } from './router-utils';
 
 export const initialFilters = init(filterables);
+export const initialFiltersByName = Object.values(initialFilters)
+  .flat()
+  .reduce((acc, scope) => {
+    return {
+      ...acc,
+      ...Object.fromEntries(
+        scope.filters.map((filter) => [filter.name, filter])
+      ),
+    };
+  }, {});
 
 export function useFilters() {
   // Get fresh filters object

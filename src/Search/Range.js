@@ -4,7 +4,7 @@ import { FiSlash } from 'react-icons/fi';
 
 import { Button, Flex } from '../Primitives';
 import { JOIN_CHAR, useQueryParam } from '../router-utils';
-import FilterBox from './Filter';
+import FilterBox from './FilterBox';
 
 const RangeSlider = RCSlider.createSliderWithTooltip(RCSlider.Range);
 
@@ -17,7 +17,11 @@ function Range(props) {
   );
 
   return (
-    <FilterBox title={obj.name} isActive={param.isActive}>
+    <FilterBox
+      title={obj.label || obj.name}
+      showTitle={obj.label !== false}
+      isActive={param.isActive}
+    >
       <Flex mt={-2} mb={-2}>
         <input
           type="checkbox"

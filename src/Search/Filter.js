@@ -1,32 +1,38 @@
-import { FiSlash } from 'react-icons/fi';
+import ListPicker from './ListPicker';
+import OptionsPicker from './OptionsPicker';
+import Range from './Range';
+import TextInput from './TextInput';
 
-import { capitalizeAndSpace } from '../App/helpers';
-import { Heading, Box, Button } from '../Primitives';
+const TEXT_OPERATORS = new Set([
+  'ilike',
+  'nilike',
+  'like',
+  'nlike',
+  'regexp',
+  'eq',
+  'neq',
+]);
 
-function FilterBox(props) {
-  const { title, isActive, onClear, children } = props;
+function Filter(props) {
+  const { obj } = props;
 
-  return (
-    <Box sx={{ position: 'relative', pr: onClear && 5 }}>
-      <Heading as="h3" variant="filter" data-active={isActive || undefined}>
-        {capitalizeAndSpace(title)}
-      </Heading>
+  if (obj.operator === 'between') {
+    return <Range {...props} />;
+  }
 
-      {children}
+  if (obj.options) {
+    return <OptionsPicker {...props} />;
+  }
 
-      {onClear && (
-        <Button
-          variant="action"
-          sx={{ position: 'absolute', top: -2, right: 0 }}
-          disabled={!isActive}
-          aria-label="Clear"
-          onClick={() => onClear()}
-        >
-          <FiSlash />
-        </Button>
-      )}
-    </Box>
-  );
+  if (obj.list) {
+    return <ListPicker {...props} />;
+  }
+
+  if (TEXT_OPERATORS.has(obj.operator)) {
+    return <TextInput {...props} />;
+  }
+
+  return null;
 }
 
-export default FilterBox;
+export default Filter;

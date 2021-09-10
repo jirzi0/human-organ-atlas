@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { Text, Flex } from '../Primitives';
 import { useQueryParam } from '../router-utils';
-import FilterBox from './Filter';
+import FilterBox from './FilterBox';
 
 function OptionsPicker(props) {
   const { obj } = props;
@@ -9,7 +9,8 @@ function OptionsPicker(props) {
 
   return (
     <FilterBox
-      title={obj.name}
+      title={obj.label || obj.name}
+      showTitle={obj.label !== false}
       isActive={param.isActive}
       onClear={() => param.remove()}
     >

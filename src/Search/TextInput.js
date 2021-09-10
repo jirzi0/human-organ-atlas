@@ -1,4 +1,3 @@
-
 import { useDebouncedCallback } from '@react-hookz/web';
 import { Input } from '@rebass/forms/styled-components';
 import { useState } from 'react';
@@ -6,7 +5,7 @@ import { FiSlash } from 'react-icons/fi';
 
 import { Flex, Button } from '../Primitives';
 import { useQueryParam } from '../router-utils';
-import FilterBox from './Filter';
+import FilterBox from './FilterBox';
 
 function TextInput(props) {
   const { obj } = props;
@@ -21,7 +20,11 @@ function TextInput(props) {
   );
 
   return (
-    <FilterBox title={obj.name} isActive={param.isActive}>
+    <FilterBox
+      title={obj.label || obj.name}
+      showTitle={obj.label !== false}
+      isActive={param.isActive}
+    >
       <Flex>
         <Input
           px={2}

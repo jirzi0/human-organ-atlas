@@ -1,28 +1,28 @@
 [
   {
+    "target": ["datasets", "parameters"],
     "filters": [
+      {
+        "name": "patient",
+        "label": false,
+        "options": ["P001", "P002", "P003", "P004", "P005"],
+        "dropDown": true
+      },
+      {
+        "name": "organ",
+        "label": false,
+        "options": ["brain", "heart", "lung"]
+      },
+      {
+        "name": "pathology",
+        "label": false,
+        "list": ["COVID-19"]
+      },
       {
         "name": "type",
-        "options": ["Proposal", "Publication"]
+        "label": false,
+        "list": ["complete organ", "partial organ", "core biopsy"]
       },
-      {
-        "name": "title"
-      },
-      {
-        "name": "keywords",
-        "list": [
-          "keyword 1",
-          "keyword 2",
-          "keyword 3",
-          "keyword 4",
-          "keyword 5"
-        ]
-      }
-    ]
-  },
-  {
-    "target": ["parameters"],
-    "filters": [
       {
         "name": "wavelength",
         "initialRange": [200, 1100],

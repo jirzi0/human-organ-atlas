@@ -2,14 +2,18 @@
 import { capitalizeAndSpace } from '../App/helpers';
 import { Text, Flex } from '../Primitives';
 import { useListQueryParam } from '../router-utils';
-import FilterBox from './Filter';
+import FilterBox from './FilterBox';
 
 function ListPicker(props) {
   const { obj } = props;
   const param = useListQueryParam(obj.name);
 
   return (
-    <FilterBox title={obj.name} isActive={param.isActive}>
+    <FilterBox
+      title={obj.label || obj.name}
+      showTitle={obj.label !== false}
+      isActive={param.isActive}
+    >
       <Flex column gap={1}>
         {obj.list.map((word) => {
           const isSelected = param.values.includes(word);
