@@ -1,7 +1,17 @@
 {
-  "name": "panosc-frontend",
-  "version": "0.1.0",
+  "name": "human-organ-atlas",
   "private": true,
+  "version": "0.1.0",
+  "description": "Human Organ Atlas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axelboc/human-organ-atlas"
+  },
+  "engines": {
+    "node": "16.x",
+    "yarn": "*"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
