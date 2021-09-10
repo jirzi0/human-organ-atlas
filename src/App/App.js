@@ -1,4 +1,3 @@
-
 import { useMediaQuery } from '@react-hookz/web';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -25,7 +24,7 @@ function App() {
 
       <Navigation />
 
-      <Box mx={[3, 3, 3, 4]} mb={5}>
+      <Box mx="auto" mb={5} px={[3, 3, 3, 4]} maxWidth="100rem">
         <Switch>
           <Route exact path="/">
             <ScrollToTop />

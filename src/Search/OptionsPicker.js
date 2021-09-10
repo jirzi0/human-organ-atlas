@@ -24,7 +24,7 @@ function OptionsPicker(props) {
               sx={{
                 alignItems: 'center',
                 color: isSelected && 'textVivid',
-                fontSize: 0,
+                fontSize: [0, 0, 0, 0, 1],
                 fontWeight: isSelected && 'bold',
                 cursor: 'pointer',
                 ':hover': { textDecoration: 'underline' },

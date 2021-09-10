@@ -33,24 +33,24 @@ export function useTheme() {
     text: {
       heading: {
         color: 'textVivid',
-        fontSize: [1, 2, 2, 3],
+        fontSize: [1, 2, 2, 3, 4],
         lineHeight: 1.25,
         mb: [1, 2],
       },
       display: {
-        fontSize: [3, 4, 4, 5],
+        fontSize: [3, 4, 4, 5, 6],
         fontWeight: 'light',
         mb: 3,
       },
       filterGroup: {
-        fontSize: 0,
+        fontSize: [0, 0, 0, 1],
         fontWeight: 'bold',
         textTransform: 'uppercase',
         letterSpacing: '0.1em',
         mb: 2,
       },
       filter: {
-        fontSize: 1,
+        fontSize: [1, 1, 1, 2],
         textTransform: 'capitalize',
         mb: 2,
         '&[data-active]': { color: 'textVivid', fontWeight: 'semibold' },
@@ -59,7 +59,7 @@ export function useTheme() {
         bg: 'foreground',
         borderRadius: 16,
         color: 'textVivid',
-        fontSize: 0,
+        fontSize: [0, 0, 0, 1],
         lineHeight: 1.75,
         px: 2,
       },
@@ -106,7 +106,7 @@ export function useTheme() {
         p: 2,
         ml: 2,
         border: '1px solid transparent',
-        fontSize: 2,
+        fontSize: [2, 2, 2, 2, 3],
         ':hover': {
           bg: 'background',
           color: 'textVivid',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
-import { parseDate , documentSize } from '../App/helpers';
+import { parseDate, documentSize } from '../App/helpers';
 import { Card, Box, Flex, Image, Heading, Link, Text } from '../Primitives';
 
 function DocumentItem(props) {
@@ -71,7 +71,13 @@ function DocumentItem(props) {
           {summary}
         </Box>
 
-        <Flex as="footer" gap={2} mt={2} fontStyle="italic" fontSize="small">
+        <Flex
+          as="footer"
+          gap={2}
+          mt={2}
+          fontStyle="italic"
+          fontSize={[0, 0, 1, 1, 2]}
+        >
           <Text>Created: {parseDate(releseDate)}</Text>
           <Text>Size: {documentSize(datasets)}</Text>
         </Flex>

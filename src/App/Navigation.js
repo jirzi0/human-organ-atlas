@@ -22,38 +22,39 @@ function Navigation() {
         bg: 'bgNav',
       }}
     >
-      <NavLink to="/" exact>
-        <Box height="logoHeight" p={[1, 0]}>
-          <Image
-            height="100%"
-            width="unset"
-            alt="PaNOSC logo"
-            src={isDark ? '/PaNOSC_logo_white.svg' : '/PaNOSC_logo_black.svg'}
-          />
-        </Box>
-      </NavLink>
-      <NavLink to="/documents" exact>
-        Explore
-      </NavLink>
-
-      <Route exact path="/documents/:documentId">
-        <NavLink
-          to="/documents"
-          exact
-          ml="auto"
-          onClick={(evt) => {
-            if (state?.fromExplorePage) {
-              evt.preventDefault();
-              history.goBack();
-            }
-          }}
-        >
-          <FiArrowLeft style={{ fontSize: '1.5em', paddingTop: '1px' }} />
-          <Text ml={2}>Back to results</Text>
+      <Flex flex="1 1 0%" mx="auto" px={[0, 0, 0, 4]} maxWidth="100rem">
+        <NavLink to="/" exact pl={[2, 3, 3, 3]}>
+          <Box height="logoHeight" p={[1, 0]}>
+            <Image
+              height="100%"
+              width="unset"
+              alt="PaNOSC logo"
+              src={isDark ? '/PaNOSC_logo_white.svg' : '/PaNOSC_logo_black.svg'}
+            />
+          </Box>
         </NavLink>
-      </Route>
+        <NavLink to="/documents" exact>
+          Explore
+        </NavLink>
 
-      {/* <Box mx="auto" />
+        <Route exact path="/documents/:documentId">
+          <NavLink
+            to="/documents"
+            exact
+            ml="auto"
+            onClick={(evt) => {
+              if (state?.fromExplorePage) {
+                evt.preventDefault();
+                history.goBack();
+              }
+            }}
+          >
+            <FiArrowLeft style={{ fontSize: '1.5em', paddingTop: '1px' }} />
+            <Text ml={2}>Back to results</Text>
+          </NavLink>
+        </Route>
+
+        {/* <Box mx="auto" />
       <Box width="80px" mx={2} height="30px" alignSelf="center">
         <Switch
           options={[{ label: 'Light' }, { label: 'Dark' }]}
@@ -61,6 +62,7 @@ function Navigation() {
           onChange={() => toggleTheme()}
         />
       </Box> */}
+      </Flex>
     </Flex>
   );
 }

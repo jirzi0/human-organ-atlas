@@ -14,10 +14,10 @@ function NavLink({ to, exact, sx, ...props }) {
       to={to === '/documents' ? { pathname: to, search } : to}
       sx={{
         alignItems: 'center',
-        px: [2, 3],
+        px: [2, 3, 3, 4],
         bg: !!match && 'background',
         color: match ? 'text' : 'inherit',
-        fontSize: [0, 1],
+        fontSize: [0, 1, 1, 2],
         fontWeight: 'semibold',
         textDecoration: 'none',
         textTransform: 'uppercase',
