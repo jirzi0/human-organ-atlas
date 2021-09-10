@@ -5,44 +5,73 @@
       {
         "name": "patient",
         "label": false,
-        "options": ["P001", "P002", "P003", "P004", "P005"],
+        "options": [
+          "LADAF-2020-27",
+          "LADAF-2020-34",
+          "LADAF-2020-52",
+          "LADAF-2021-01",
+          "LADAF-2021-12"
+        ],
         "dropDown": true
       },
       {
-        "name": "organ",
-        "label": false,
-        "options": ["brain", "heart", "lung"]
+        "name": "sex",
+        "options": ["male", "female"]
       },
       {
-        "name": "pathology",
-        "label": false,
-        "list": ["COVID-19"]
+        "name": "age",
+        "initialRange": [0, 110]
+      },
+      {
+        "name": "size",
+        "initialRange": [0, 250]
+      },
+      {
+        "name": "weight",
+        "initialRange": [0, 300]
+      },
+      {
+        "name": "organ",
+        "list": ["brain", "heart", "lung"]
       },
       {
         "name": "type",
-        "label": false,
         "list": ["complete organ", "partial organ", "core biopsy"]
       },
       {
-        "name": "wavelength",
-        "initialRange": [200, 1100],
+        "name": "pathology",
+        "list": ["COVID-19"]
+      },
+      {
+        "name": "preparation",
+        "list": ["ethanol 70%"]
+      },
+      {
+        "name": "technique",
+        "label": "Imaging technique",
+        "list": ["HiP-CT", "medical CT", "MRI"]
+      },
+      {
+        "name": "date"
+      },
+      {
+        "name": "voxel_size",
+        "initialRange": [0, 100000],
         "initialUnit": "nm"
       },
       {
-        "name": "unitless number thing",
-        "initialRange": [200, 1100]
-      },
-      {
-        "name": "photon_energy",
+        "name": "average_energy",
         "initialRange": [0, 1000],
         "initialUnit": "eV"
       },
       {
-        "name": "chemical_formula"
+        "name": "surface_dose_rate",
+        "initialRange": [0, 1000]
       },
       {
-        "name": "Rainbow Generator",
-        "options": ["Half", "Full", "Double"]
+        "name": "integrated_dose",
+        "label": "Integrated Dose in VOI",
+        "initialRange": [0, 1000]
       }
     ]
   }

@@ -10,15 +10,14 @@ import FilterGroup from './FilterGroup';
 // const sortFilters = (a, b) => ORDER.indexOf(a?.name) - ORDER.indexOf(b?.name);
 
 const GROUPS = {
-  Patient: ['patient'],
-  Organ: ['organ', 'type'],
-  Pathology: ['pathology'],
+  Patient: ['patient', 'sex', 'age', 'size', 'weight'],
+  Sample: ['organ', 'type', 'pathology', 'preparation'],
+  Acquisition: ['technique', 'date'],
   Parameters: [
-    'wavelength',
-    'unitless number thing',
-    'photon_energy',
-    'chemical_formula',
-    'Rainbow Generator',
+    'voxel_size',
+    'average_energy',
+    'surface_dose_rate',
+    'integrated_dose',
   ],
 };
 
@@ -30,19 +29,13 @@ function Search() {
 
   return (
     <Flex column gap={[3, 3, 3, 4]}>
-      <Card>
-        <Flex column gap={[3, 2, 3, 4]}>
-          {Object.entries(GROUPS).map(([title, group]) => (
-            <FilterGroup
-              key={group}
-              title={title}
-              filters={group.map(
-                (filterName) => initialFiltersByName[filterName]
-              )}
-            />
-          ))}
-        </Flex>
-      </Card>
+      {Object.entries(GROUPS).map(([title, group]) => (
+        <FilterGroup
+          key={group}
+          title={title}
+          filters={group.map((filterName) => initialFiltersByName[filterName])}
+        />
+      ))}
       <Card mb={3}>
         <Flex alignItems="center">
           <Button
