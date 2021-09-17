@@ -28,7 +28,7 @@ function DocumentPage() {
         <DocumentMeta data={data} />
       </Box>
       <Box width={[1, 1, 1 / 4]}>
-        <Heading variant="display">Datasets</Heading>
+        <Heading variant="display">Volumes</Heading>
         <Flex column gap={[1, 1, 2, 3]}>
           {data.datasets?.map((dataset) => (
             <Dataset key={dataset.pid} {...dataset} />

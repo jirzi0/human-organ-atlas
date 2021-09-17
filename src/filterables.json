@@ -3,18 +3,6 @@
     "target": ["datasets", "parameters"],
     "filters": [
       {
-        "name": "patient",
-        "label": false,
-        "options": [
-          "LADAF-2020-27",
-          "LADAF-2020-34",
-          "LADAF-2020-52",
-          "LADAF-2021-01",
-          "LADAF-2021-12"
-        ],
-        "dropDown": true
-      },
-      {
         "name": "sex",
         "options": ["male", "female"]
       },

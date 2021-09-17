@@ -11,7 +11,7 @@ function NavLink({ to, exact, sx, ...props }) {
   return (
     <Flex
       as={Link}
-      to={to === '/documents' ? { pathname: to, search } : to}
+      to={to === '/search' ? { pathname: to, search } : to}
       sx={{
         alignItems: 'center',
         px: [2, 3, 3, 4],

@@ -26,7 +26,7 @@ function DocumentItem(props) {
       onClick={() => {
         history.push({
           pathname: url,
-          state: { fromExplorePage: true },
+          state: { fromSearchPage: true },
         });
       }}
     >

@@ -33,17 +33,17 @@ function Navigation() {
             />
           </Box>
         </NavLink>
-        <NavLink to="/documents" exact>
-          Explore
+        <NavLink to="/search" exact>
+          Search
         </NavLink>
 
         <Route exact path="/documents/:documentId">
           <NavLink
-            to="/documents"
+            to="/search"
             exact
             ml="auto"
             onClick={(evt) => {
-              if (state?.fromExplorePage) {
+              if (state?.fromSearchPage) {
                 evt.preventDefault();
                 history.goBack();
               }

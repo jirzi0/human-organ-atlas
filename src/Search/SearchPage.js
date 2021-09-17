@@ -4,10 +4,10 @@ import { useLocation } from 'react-router-dom';
 import Boundary from '../App/Boundary';
 import { useSearchStore } from '../App/stores';
 import { Flex, Box } from '../Primitives';
-import Search from '../Search/Search';
 import DocumentList from './DocumentList';
+import SearchSidebar from './SearchSidebar';
 
-function ExplorePage(props) {
+function SearchPage(props) {
   const { isDesktop } = props;
   const { search } = useLocation();
   const setSearch = useSearchStore((state) => state.setSearch);
@@ -24,7 +24,7 @@ function ExplorePage(props) {
           display={['none', 'none', 'block']}
           width={[1, 1, 1 / 4]}
         >
-          {isDesktop && <Search />}
+          {isDesktop && <SearchSidebar />}
         </Box>
       ) : (
         <Box
@@ -36,7 +36,7 @@ function ExplorePage(props) {
             Filters
           </Box>
           <Box mt={2}>
-            <Search />
+            <SearchSidebar />
           </Box>
         </Box>
       )}
@@ -49,4 +49,4 @@ function ExplorePage(props) {
   );
 }
 
-export default ExplorePage;
+export default SearchPage;

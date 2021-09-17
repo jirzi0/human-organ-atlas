@@ -10,7 +10,7 @@ import FilterGroup from './FilterGroup';
 // const sortFilters = (a, b) => ORDER.indexOf(a?.name) - ORDER.indexOf(b?.name);
 
 const GROUPS = {
-  Patient: ['patient', 'sex', 'age', 'size', 'weight'],
+  Patient: ['sex', 'age', 'size', 'weight'],
   Sample: ['organ', 'type', 'pathology', 'preparation'],
   Acquisition: ['technique', 'date'],
   Parameters: [
@@ -21,7 +21,7 @@ const GROUPS = {
   ],
 };
 
-function Search() {
+function SearchSidebar() {
   const [loadOnScroll, toggleLoadOnScroll] = useAppStore(
     (state) => [state.loadOnScroll, state.toggleLoadOnScroll],
     shallow
@@ -56,4 +56,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default SearchSidebar;

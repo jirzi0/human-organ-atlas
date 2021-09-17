@@ -4,9 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import DocumentPage from '../Document/DocumentPage';
-import ExplorePage from '../Explore/ExplorePage';
 import HomePage from '../Home/HomePage';
 import { Box } from '../Primitives';
+import SearchPage from '../Search/SearchPage';
 import { breakpoints } from '../breakpoints';
 import { useTheme } from '../theme';
 import Boundary from './Boundary';
@@ -30,8 +30,8 @@ function App() {
             <ScrollToTop />
             <HomePage />
           </Route>
-          <Route exact path="/documents">
-            <ExplorePage isDesktop={isDesktop} />
+          <Route exact path="/search">
+            <SearchPage isDesktop={isDesktop} />
           </Route>
           <Route exact path="/documents/:documentId">
             <Boundary>
