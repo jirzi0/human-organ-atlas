@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import DocumentPage from '../Document/DocumentPage';
+import ExplorePage from '../Explore/ExplorePage';
 import HomePage from '../Home/HomePage';
 import { Box } from '../Primitives';
 import SearchPage from '../Search/SearchPage';
@@ -29,6 +30,9 @@ function App() {
           <Route exact path="/">
             <ScrollToTop />
             <HomePage />
+          </Route>
+          <Route path="/explore">
+            <ExplorePage />
           </Route>
           <Route exact path="/search">
             <SearchPage isDesktop={isDesktop} />

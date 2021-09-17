@@ -26,7 +26,7 @@ function DocumentItem(props) {
       onClick={() => {
         history.push({
           pathname: url,
-          state: { fromSearchPage: true },
+          state: { canGoBack: true },
         });
       }}
     >

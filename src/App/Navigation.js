@@ -22,7 +22,7 @@ function Navigation() {
         bg: 'bgNav',
       }}
     >
-      <Flex flex="1 1 0%" mx="auto" px={[0, 0, 0, 4]} maxWidth="100rem">
+      <Flex flex="1 1 0%" mx="auto" px={[0, 0, 0, 3]} maxWidth="100rem">
         <NavLink to="/" exact pl={[2, 3, 3, 3]}>
           <Box height="logoHeight" p={[1, 0]}>
             <Image
@@ -33,6 +33,8 @@ function Navigation() {
             />
           </Box>
         </NavLink>
+
+        <NavLink to="/explore">Explore</NavLink>
         <NavLink to="/search" exact>
           Search
         </NavLink>
@@ -43,7 +45,7 @@ function Navigation() {
             exact
             ml="auto"
             onClick={(evt) => {
-              if (state?.fromSearchPage) {
+              if (state?.canGoBack) {
                 evt.preventDefault();
                 history.goBack();
               }
