@@ -12,7 +12,7 @@ import DocumentItem from './DocumentItem';
 
 const PAGE_SIZE = 5;
 const QUERY_CONFIG = {
-  include: [['datasets']],
+  include: [['parameters']],
   pageSize: PAGE_SIZE,
 };
 
@@ -22,7 +22,7 @@ function DocumentList() {
 
   const { data, size, setSize } = useSWRInfinite((page, previous) => {
     const filter = translate(filters, { ...QUERY_CONFIG, page: page + 1 });
-    return `/documents?filter=${filter}`;
+    return `/datasets?filter=${filter}`;
   });
 
   // Infinite scroll
@@ -31,8 +31,8 @@ function DocumentList() {
     loadOnScroll && inView && setSize((val) => val + 1);
   }, [loadOnScroll, inView, setSize]);
 
-  const documents = data.flat();
-  const isEmpty = documents.length === 0;
+  const datasets = data.flat();
+  const isEmpty = datasets.length === 0;
   const isLoadingMore = !data[size - 1];
   const hasReachedEnd = data[data.length - 1].length < PAGE_SIZE;
 
@@ -47,7 +47,7 @@ function DocumentList() {
             </Card>
           ) : (
             <>
-              {documents.map((doc) => (
+              {datasets.map((doc) => (
                 <DocumentItem document={doc} key={doc.pid} />
               ))}
               {isLoadingMore ? (

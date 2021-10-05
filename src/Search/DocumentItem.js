@@ -6,10 +6,18 @@ import { Card, Box, Flex, Image, Heading, Link, Text } from '../Primitives';
 
 function DocumentItem(props) {
   const { document } = props;
-  const { pid, img, title, keywords, summary, releseDate, datasets } = document;
+  const {
+    pid,
+    img,
+    title,
+    keywords = [],
+    summary,
+    releseDate,
+    datasets = [],
+  } = document;
 
   const history = useHistory();
-  const url = `/documents/${encodeURIComponent(pid)}`;
+  const url = `/datasets/${encodeURIComponent(pid)}`;
 
   return (
     <Box

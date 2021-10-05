@@ -41,7 +41,7 @@ function SearchPage(props) {
         </Box>
       )}
       <Box width={[1, 1, 3 / 4]}>
-        <Boundary>
+        <Boundary resetKeys={[search]}>
           <DocumentList name="Data" />
         </Boundary>
       </Box>

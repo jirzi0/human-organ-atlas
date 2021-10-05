@@ -12,7 +12,7 @@ export function useTheme() {
       text: 'Open Sans, system-ui, sans-serif',
       heading: 'inherit',
     },
-    fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
+    fontSizes: [14, 16, 16, 20, 24, 32, 48, 64, 96],
     fontWeights: {
       light: 300,
       semibold: 600,
@@ -37,10 +37,16 @@ export function useTheme() {
         lineHeight: 1.25,
         mb: [1, 2],
       },
+      boldHeading: {
+        variant: 'text.heading',
+        fontWeight: ['bold', 'bold, normal'],
+      },
       display: {
         fontSize: [3, 4, 4, 5, 6],
-        fontWeight: 'light',
-        mb: 3,
+        fontWeight: ['normal', 'normal', 'normal', 'light'],
+        color: ['textVivid', 'textVivid', 'textVivid', 'textVivid', 'text'],
+        mt: 0,
+        mb: [3, 3, 3, 4],
       },
       filterGroup: {
         fontSize: [0, 0, 0, 1],
@@ -71,6 +77,18 @@ export function useTheme() {
         textDecoration: 'none',
         ':hover, :focus, .active': { color: 'text' },
         ':hover': { textDecoration: 'underline' },
+      },
+      doi: {
+        display: 'inline-flex',
+        bg: 'primary',
+        borderRadius: 3,
+        overflow: 'hidden',
+        color: 'textInverted',
+        textDecoration: 'none',
+        '& > span:first-child': { bg: 'bgInverted' },
+        '& > span:last-child': { fontWeight: '600' },
+        '& > span': { px: 2 },
+        '&:hover > span:last-child': { bg: 'secondary', color: 'textVivid' },
       },
     },
     buttons: {

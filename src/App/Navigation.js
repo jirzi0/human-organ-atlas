@@ -18,7 +18,7 @@ function Navigation() {
         top: 0,
         zIndex: 1,
         height: 'navHeight',
-        mb: [3, 4],
+        mb: 4,
         bg: 'bgNav',
       }}
     >
@@ -39,7 +39,7 @@ function Navigation() {
           Search
         </NavLink>
 
-        <Route exact path="/documents/:documentId">
+        <Route exact path="/datasets/:datasetId">
           <NavLink
             to="/search"
             exact
@@ -52,7 +52,12 @@ function Navigation() {
             }}
           >
             <FiArrowLeft style={{ fontSize: '1.5em', paddingTop: '1px' }} />
-            <Text ml={2}>Back to results</Text>
+            <Text ml={2}>
+              Back{' '}
+              <Text as="span" display={['none', 'none', 'inline']}>
+                to results
+              </Text>
+            </Text>
           </NavLink>
         </Route>
 

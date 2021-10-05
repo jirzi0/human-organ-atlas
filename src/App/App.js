@@ -1,6 +1,6 @@
 import { useMediaQuery } from '@react-hookz/web';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import DocumentPage from '../Document/DocumentPage';
@@ -18,6 +18,7 @@ import ScrollToTop from './ScrollToTop';
 function App() {
   const theme = useTheme();
   const isDesktop = useMediaQuery(`(min-width: ${breakpoints[1]})`);
+  const location = useLocation();
 
   return (
     <ThemeProvider theme={theme}>
@@ -25,25 +26,31 @@ function App() {
 
       <Navigation />
 
-      <Box mx="auto" mb={5} px={[3, 3, 3, 4]} maxWidth="100rem">
-        <Switch>
-          <Route exact path="/">
-            <ScrollToTop />
-            <HomePage />
-          </Route>
-          <Route path="/explore">
-            <ExplorePage />
-          </Route>
-          <Route exact path="/search">
-            <SearchPage isDesktop={isDesktop} />
-          </Route>
-          <Route exact path="/documents/:documentId">
-            <Boundary>
+      <Box
+        mx="auto"
+        mb={5}
+        px={[3, 3, 3, 4]}
+        pt={[0, 0, 0, 3]}
+        maxWidth="100rem"
+      >
+        <Boundary resetKeys={[location]}>
+          <Switch>
+            <Route exact path="/">
+              <ScrollToTop />
+              <HomePage />
+            </Route>
+            <Route path="/explore">
+              <ExplorePage />
+            </Route>
+            <Route exact path="/search">
+              <SearchPage isDesktop={isDesktop} />
+            </Route>
+            <Route exact path="/datasets/:datasetId">
               <ScrollToTop />
               <DocumentPage />
-            </Boundary>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </Boundary>
       </Box>
     </ThemeProvider>
   );

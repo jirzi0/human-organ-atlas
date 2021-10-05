@@ -18,7 +18,7 @@ function OrganList() {
     >
       {ORGANS.map((organ) => (
         <Card
-          key={organ.id}
+          key={organ.name}
           as={RouterLink}
           to={`/explore/${patientId}/${organ.name}`}
           variant="card"

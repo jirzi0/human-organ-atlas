@@ -17,11 +17,11 @@ function DatasetList() {
         <Card
           key={dataset.id}
           as={RouterLink}
-          to={`/documents/${encodeURIComponent(dataset.id)}`}
+          to={`/datasets/${encodeURIComponent(dataset.id)}`}
           onClick={(evt) => {
             evt.preventDefault();
             history.push({
-              pathname: `/documents/${encodeURIComponent(dataset.id)}`,
+              pathname: `/datasets/${encodeURIComponent(dataset.id)}`,
               state: { canGoBack: true },
             });
           }}

@@ -2,17 +2,9 @@ import { NavLink as RouterLink } from 'react-router-dom';
 
 import { Box, Card, Heading, Text } from '../Primitives';
 
-const PATIENTS = [
-  { id: 'LADAF-2020-27', sex: 'male', age: 82 },
-  { id: 'LADAF-2020-34', sex: 'female', age: 67 },
-  { id: 'LADAF-2020-52', sex: 'female', age: 98 },
-  { id: 'LADAF-2021-01', sex: 'male', age: 90 },
-  { id: 'LADAF-2021-12', sex: 'female', age: 56 },
-  { id: 'LADAF-2020-520', sex: 'female', age: 98 },
-  { id: 'LADAF-2021-010', sex: 'male', age: 90 },
-];
+function PatientList(props) {
+  const { patients } = props;
 
-function PatientList() {
   return (
     <Box
       sx={{
@@ -22,11 +14,11 @@ function PatientList() {
         gridTemplateColumns: 'repeat(auto-fit, minmax(12rem, 1fr))',
       }}
     >
-      {PATIENTS.map((patient) => (
+      {[...patients.entries()].map(([id, info]) => (
         <Card
-          key={patient.id}
+          key={id}
           as={RouterLink}
-          to={`/explore/${patient.id}`}
+          to={`/explore/${id}`}
           variant="card"
           sx={{
             borderRadius: 4,
@@ -44,9 +36,9 @@ function PatientList() {
             },
           }}
         >
-          <Heading as="h3">{patient.id}</Heading>
+          <Heading as="h3">{id}</Heading>
           <Text>
-            {patient.sex}, {patient.age} yo
+            {info.sex}, {info.age} yo, {info.weight} kg
           </Text>
         </Card>
       ))}
