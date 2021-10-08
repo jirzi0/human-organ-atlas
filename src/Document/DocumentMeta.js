@@ -4,7 +4,18 @@ import { Box, Card, Heading, Link, Text } from '../Primitives';
 import MetaItem from './MetaItem';
 
 function DocumentMeta(props) {
-  const { doi, description, sample, patient, scan } = props;
+  const { documentId, instrument, parameters } = props;
+  const {
+    doi,
+    startDate,
+    samplePatient,
+    sample,
+    tomo,
+    instrumentSource,
+    instrumentAttenuator01,
+    instrumentDetector01,
+    scanType,
+  } = parameters;
 
   return (
     <>
@@ -14,31 +25,20 @@ function DocumentMeta(props) {
             Description
           </Heading>
           <Text as="p" color="textVivid">
-            {description}
+            {doi.abstract}
           </Text>
         </Card>
         <Box as="ul" bg="middleground" color="inherit" pl={0}>
-          <MetaItem label="Citation">
-            <Link variant="doi" href={`http://doi.org/${doi}`} blank>
+          <MetaItem label="DOI">
+            <Link variant="doi" href={`http://doi.org/${documentId}`} blank>
               <Text as="span">DOI</Text>
-              <Text as="span">{doi.slice(4)}</Text>
+              <Text as="span">{documentId}</Text>
             </Link>
           </MetaItem>
-          <MetaItem label="Instrument">{scan.idNames}</MetaItem>
-          <MetaItem label="Technique">{scan.technique}</MetaItem>
-        </Box>
-      </Box>
-      <Box>
-        <Card px={[3, 3, 3, 4]} py={[3]}>
-          <Heading variant="boldHeading" mb={[0, 0]}>
-            Sample
-          </Heading>
-        </Card>
-        <Box as="ul" bg="middleground" color="inherit" pl={0}>
-          <MetaItem label="Name">{sample.name}</MetaItem>
-          <MetaItem label="Description">{sample.description}</MetaItem>
-          <MetaItem label="Preparation">
-            {sample.preparationDescription}
+          <MetaItem label="Users">{doi.users}</MetaItem>
+          <MetaItem label="Technique">{tomo.technique}</MetaItem>
+          <MetaItem label="Instrument">
+            {instrument.name}, {instrument.facility}
           </MetaItem>
         </Box>
       </Box>
@@ -49,121 +49,180 @@ function DocumentMeta(props) {
           </Heading>
         </Card>
         <Box as="ul" bg="middleground" color="inherit" pl={0}>
-          <MetaItem label="Number">{patient.number}</MetaItem>
-          <MetaItem label="Origin">{patient.institute}</MetaItem>
-          <MetaItem label="Size">{patient.size} cm</MetaItem>
-          <MetaItem label="Weight">{patient.weight} kg</MetaItem>
-          <MetaItem label="Info">{patient.info}</MetaItem>
+          <MetaItem label="Institute">{samplePatient.institute}</MetaItem>
+          <MetaItem label="Number">{samplePatient.number}</MetaItem>
+          <MetaItem label="Age">{samplePatient.age} yo</MetaItem>
+          <MetaItem label="Sex">{samplePatient.sex}</MetaItem>
+          <MetaItem label="Weight">
+            {samplePatient.weight ? `${samplePatient.weight} kg` : 'unknown'}
+          </MetaItem>
+          <MetaItem label="Size">
+            {samplePatient.size > 0 ? `${samplePatient.size} cm` : 'unknown'}
+          </MetaItem>
+          <MetaItem label="Medical info">{samplePatient.info}</MetaItem>
         </Box>
       </Box>
       <Box>
         <Card px={[3, 3, 3, 4]} py={[3]}>
           <Heading variant="boldHeading" mb={[0, 0]}>
-            Scan
+            Sample
           </Heading>
         </Card>
         <Box as="ul" bg="middleground" color="inherit" pl={0}>
-          <MetaItem wide label="Detector">
-            {scan.detectorDescription}
+          <MetaItem label="Name">{sample.name}</MetaItem>
+          <MetaItem label="Info">{sample.description}</MetaItem>
+          <MetaItem label="Preparation">
+            {sample.preparationDescription}
           </MetaItem>
-          <MetaItem wide label="Detector distance">
-            {scan.detectorDistance}
+        </Box>
+      </Box>
+      <Box>
+        <Card px={[3, 3, 3, 4]} py={[3]}>
+          <Heading variant="boldHeading" mb={[0, 0]}>
+            Scan parameters
+          </Heading>
+        </Card>
+        <Box as="ul" bg="middleground" color="inherit" pl={0}>
+          <MetaItem wide label="Start date">
+            {startDate}
           </MetaItem>
-          <MetaItem wide label="Acquisition mode">
-            {scan.acquisitionMode}
+          <MetaItem wide label="SR current">
+            {instrumentSource.current} mA
           </MetaItem>
-          <MetaItem wide label="Current">
-            {scan.current}
-          </MetaItem>
-          <MetaItem wide label="Energy">
-            {scan.energy}
-          </MetaItem>
-          <MetaItem wide label="Exposure time">
-            {scan.exposureTime}
-          </MetaItem>
-          <MetaItem wide label="Acc. exposure time">
-            {scan.accExposureTime}
-          </MetaItem>
-          <MetaItem wide label="Acc. frames count">
-            {scan.accFramesCount}
-          </MetaItem>
-          <MetaItem wide label="Dark n">
-            {scan.darkN}
-          </MetaItem>
-          <MetaItem wide label="Half acquisition">
-            {scan.halfAcquisition}
-          </MetaItem>
-          <MetaItem wide label="JP2 compression ratio">
-            {scan.jp2CompressRatio}
-          </MetaItem>
-          <MetaItem wide label="Magnification">
-            {scan.magnification}
-          </MetaItem>
-          <MetaItem wide label="Optics type">
-            {scan.opticsType}
-          </MetaItem>
-          <MetaItem wide label="Pixel size">
-            {scan.pixelSize}
-          </MetaItem>
-          <MetaItem wide label="Proj n">
-            {scan.projN}
-          </MetaItem>
-          <MetaItem wide label="Ref n">
-            {scan.refN}
-          </MetaItem>
-          <MetaItem wide label="Ref on">
-            {scan.refOn}
-          </MetaItem>
-          <MetaItem wide label="Reference">
-            {scan.referenceDescription}
+          <MetaItem wide label="ID names">
+            {tomo.idNames}
           </MetaItem>
           <MetaItem wide label="Scan radix">
-            {scan.scanRadix}
+            {tomo.scanRadix}
+          </MetaItem>
+          <MetaItem wide label="X step">
+            {tomo.xStep || 'N.A.'}
+          </MetaItem>
+          <MetaItem wide label="X stages">
+            {tomo.xStages}
+          </MetaItem>
+          <MetaItem wide label="Y step">
+            {tomo.yStep || 'N.A.'}
+          </MetaItem>
+          <MetaItem wide label="Y stages">
+            {tomo.yStages}
+          </MetaItem>
+          <MetaItem wide label="Z step">
+            {tomo.zStep}
+          </MetaItem>
+          <MetaItem wide label="Z stages">
+            {tomo.zStages}
+          </MetaItem>
+          <MetaItem wide label="Projections">
+            {tomo.projN}
+          </MetaItem>
+          <MetaItem wide label="Ref N">
+            {tomo.refN || 'N.A.'}
+          </MetaItem>
+          <MetaItem wide label="Dark N">
+            {tomo.darkN}
+          </MetaItem>
+          <MetaItem wide label="Ref on">
+            {tomo.refOn || 'N.A.'}
+          </MetaItem>
+          <MetaItem wide label="Scanning mode">
+            {scanType}
+          </MetaItem>
+          <MetaItem wide label="Exposure time">
+            {tomo.exposureTime}
+          </MetaItem>
+          <MetaItem wide label="Acc. exposure time">
+            {tomo.accExposureTime}
+          </MetaItem>
+          <MetaItem wide label="Acc. frames count">
+            {tomo.accFramesCount}
+          </MetaItem>
+          <MetaItem wide label="Pixel size">
+            {tomo.pixelSize}
+          </MetaItem>
+          <MetaItem wide label="Prop. distance">
+            {tomo.detectorDistance}
+          </MetaItem>
+          <MetaItem wide label="Filters">
+            {instrumentAttenuator01.description}
+          </MetaItem>
+          <MetaItem wide label="Detector avg. energy">
+            {tomo.energy}
+          </MetaItem>
+          <MetaItem wide label="Scan geometry">
+            {tomo.halfAcquisition}
           </MetaItem>
           <MetaItem wide label="Scan range">
-            {scan.scanRange}
+            {tomo.scanRange}
           </MetaItem>
-          <MetaItem wide label="Scan time">
-            {scan.scanTime}
+          <MetaItem wide label="Sensor name">
+            {instrumentDetector01.description}
           </MetaItem>
-          <MetaItem wide label="Scan mode">
-            {scan.scanning_mode}
+          <MetaItem wide label="Sensor mode">
+            {instrumentDetector01.acquisitionMode}
+          </MetaItem>
+          <MetaItem wide label="Sensor pixel size">
+            {tomo.ccdPixelSize}
+          </MetaItem>
+          <MetaItem wide label="Magnification">
+            {tomo.magnification}
+          </MetaItem>
+          <MetaItem wide label="X pixel num.">
+            {tomo.xPixelN}
+          </MetaItem>
+          <MetaItem wide label="Y pixel num.">
+            {tomo.yPixelN}
+          </MetaItem>
+          <MetaItem wide label="Optics type">
+            {tomo.opticsType}
           </MetaItem>
           <MetaItem wide label="Scintillator">
-            {scan.scintillator}
+            {tomo.scintillator}
+          </MetaItem>
+          <MetaItem wide label="Surface dose rate">
+            {tomo.surfaceDose}
+          </MetaItem>
+          <MetaItem wide label="VOI dose rate">
+            {tomo.voiDose}
+          </MetaItem>
+          <MetaItem wide label="VOI integ. dose">
+            {tomo.totalVoiDose}
+          </MetaItem>
+          <MetaItem wide label="Scan time">
+            {tomo.scanTime}
           </MetaItem>
           <MetaItem wide label="Series time">
-            {scan.seriesTime}
+            {tomo.seriesTime}
           </MetaItem>
-          <MetaItem wide label="VOI dose">
-            {scan.voiDose}
+        </Box>
+      </Box>
+      <Box>
+        <Card px={[3, 3, 3, 4]} py={[3]}>
+          <Heading variant="boldHeading" mb={[0, 0]}>
+            Processing
+          </Heading>
+        </Card>
+        <Box as="ul" bg="middleground" color="inherit" pl={0}>
+          <MetaItem wide label="Ref. approach">
+            {tomo.referenceDescription}
           </MetaItem>
-          <MetaItem wide label="Total VOI dose">
-            {scan.totalVoiDose}
+          <MetaItem wide label="Volume X">
+            {tomo.xVolume}
           </MetaItem>
-          <MetaItem wide label="x stages">
-            {scan.xStages}
+          <MetaItem wide label="Volume Y">
+            {tomo.yVolume}
           </MetaItem>
-          <MetaItem wide label="x step">
-            {scan.xStep}
+          <MetaItem wide label="Volume Z">
+            {tomo.zVolume}
           </MetaItem>
-          <MetaItem wide label="x pixels">
-            {scan.xPixelN}
+          <MetaItem wide label="32 to 16 bits min.">
+            {tomo.min32To16Bits}
           </MetaItem>
-          <MetaItem wide label="y stages">
-            {scan.yStages}
+          <MetaItem wide label="32 to 16 bits max.">
+            {tomo.max32To16Bits}
           </MetaItem>
-          <MetaItem wide label="y step">
-            {scan.yStep}
-          </MetaItem>
-          <MetaItem wide label="y pixels">
-            {scan.yPixelN}
-          </MetaItem>
-          <MetaItem wide label="z stages">
-            {scan.zStages}
-          </MetaItem>
-          <MetaItem wide label="z step">
-            {scan.zStep}
+          <MetaItem wide label="JP2 compr. ratio">
+            {tomo.jp2CompressRatio}
           </MetaItem>
         </Box>
       </Box>

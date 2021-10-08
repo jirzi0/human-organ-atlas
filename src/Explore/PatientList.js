@@ -1,19 +1,19 @@
 import { NavLink as RouterLink } from 'react-router-dom';
 
-import { Box, Card, Heading, Text } from '../Primitives';
+import { Flex, Card, Heading, Text } from '../Primitives';
 
 function PatientList(props) {
-  const { patients } = props;
+  const { datasets } = props;
+
+  const patients = new Map(
+    datasets.map((d) => [
+      d.parameters.samplePatient.number,
+      d.parameters.samplePatient,
+    ])
+  );
 
   return (
-    <Box
-      sx={{
-        flex: '1 1 0%',
-        display: 'grid',
-        gridGap: 3,
-        gridTemplateColumns: 'repeat(auto-fit, minmax(12rem, 1fr))',
-      }}
-    >
+    <Flex sx={{ flexWrap: 'wrap', gap: 3 }}>
       {[...patients.entries()].map(([id, info]) => (
         <Card
           key={id}
@@ -21,6 +21,7 @@ function PatientList(props) {
           to={`/explore/${id}`}
           variant="card"
           sx={{
+            minWidth: '250px',
             borderRadius: 4,
             color: 'inherit',
             border: '2px solid',
@@ -38,11 +39,11 @@ function PatientList(props) {
         >
           <Heading as="h3">{id}</Heading>
           <Text>
-            {info.sex}, {info.age} yo, {info.weight} kg
+            {info.sex}, {info.age} yo
           </Text>
         </Card>
       ))}
-    </Box>
+    </Flex>
   );
 }
 

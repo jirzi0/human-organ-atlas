@@ -1,27 +1,30 @@
-import { useHistory, Link as RouterLink } from 'react-router-dom';
+import { useParams, useHistory, Link as RouterLink } from 'react-router-dom';
 
 import { Card, Flex, Heading, Text } from '../Primitives';
 
-const DATASETS = [
-  { id: '10.5072/panosc-document1' },
-  { id: '10.5072/panosc-document10' },
-  { id: '10.5072/panosc-document11' },
-];
+function DatasetList(props) {
+  const { datasets } = props;
 
-function DatasetList() {
   const history = useHistory();
+  const { patientId, organ } = useParams();
+
+  const filteredDatasets = datasets.filter(
+    (d) =>
+      d.parameters.samplePatient.number === patientId &&
+      d.parameters.samplePatient.organName === organ
+  );
 
   return (
-    <Flex gap={3} sx={{}}>
-      {DATASETS.map((dataset) => (
+    <Flex sx={{ flexWrap: 'wrap', gap: 3 }}>
+      {filteredDatasets.map((dataset) => (
         <Card
           key={dataset.id}
           as={RouterLink}
-          to={`/datasets/${encodeURIComponent(dataset.id)}`}
+          to={`/datasets/${encodeURIComponent(dataset.pid)}`}
           onClick={(evt) => {
             evt.preventDefault();
             history.push({
-              pathname: `/datasets/${encodeURIComponent(dataset.id)}`,
+              pathname: `/datasets/${encodeURIComponent(dataset.pid)}`,
               state: { canGoBack: true },
             });
           }}
@@ -37,12 +40,11 @@ function DatasetList() {
             },
           }}
         >
-          <Heading as="h4">{dataset.id}</Heading>
+          <Heading as="h4">{dataset.title}</Heading>
           <Flex alignItems="center">
             <Text variant="keyword" mr={[1, 2]}>
               HiP-CT
             </Text>
-            <Text as="p">Volumes: 3</Text>
           </Flex>
         </Card>
       ))}

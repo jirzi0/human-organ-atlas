@@ -1,20 +1,12 @@
 import React from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
-import { parseDate, documentSize } from '../App/helpers';
 import { Card, Box, Flex, Image, Heading, Link, Text } from '../Primitives';
 
 function DocumentItem(props) {
-  const { document } = props;
-  const {
-    pid,
-    img,
-    title,
-    keywords = [],
-    summary,
-    releseDate,
-    datasets = [],
-  } = document;
+  // console.log(props);
+  const { pid, title, parameters } = props;
+  const { doi, startDate, definition, samplePatient } = parameters;
 
   const history = useHistory();
   const url = `/datasets/${encodeURIComponent(pid)}`;
@@ -44,10 +36,14 @@ function DocumentItem(props) {
         height="10rem"
         overflow="hidden"
       >
-        <Image src={img} width="100%" height="100%" />
+        <Image
+          src="https://source.unsplash.com/random/428x428"
+          width="100%"
+          height="100%"
+        />
       </Box>
 
-      <Card width={[1, 2 / 3, 3 / 4]}>
+      <Card width={[1, 3 / 4, 3 / 4, 4 / 5]}>
         <Link
           as={RouterLink}
           to={url}
@@ -58,11 +54,12 @@ function DocumentItem(props) {
         </Link>
 
         <Flex>
-          {keywords.map((keyword) => (
-            <Text key={keyword} variant="keyword" mr={[1, 2]}>
-              {keyword.toLowerCase()}
-            </Text>
-          ))}
+          <Text variant="keyword" mr={[1, 2]}>
+            {definition}
+          </Text>
+          <Text variant="keyword" mr={[1, 2]}>
+            {samplePatient.organName}
+          </Text>
         </Flex>
 
         <Box
@@ -76,7 +73,7 @@ function DocumentItem(props) {
             mt: 3,
           }}
         >
-          {summary}
+          {doi.abstract}
         </Box>
 
         <Flex
@@ -86,17 +83,21 @@ function DocumentItem(props) {
           fontStyle="italic"
           fontSize={[0, 0, 1, 1, 2]}
         >
-          <Text>Created: {parseDate(releseDate)}</Text>
-          <Text>Size: {documentSize(datasets)}</Text>
+          <Text>Created: {startDate}</Text>
+          {/* <Text>Size: {documentSize(datasets)}</Text> */}
         </Flex>
       </Card>
 
       <Box
         display={['none', 'block']}
-        width={[1, 1 / 3, 1 / 4]}
+        width={[1, 1 / 4, 1 / 4, 1 / 5]}
         bg="middleground"
       >
-        <Image width="100%" src={img} minHeight="0" />
+        <Image
+          width="100%"
+          src="https://source.unsplash.com/random/428x428"
+          minHeight="0"
+        />
       </Box>
     </Box>
   );

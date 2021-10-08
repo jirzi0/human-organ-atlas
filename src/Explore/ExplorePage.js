@@ -15,34 +15,41 @@ const QUERY_FILTER = translate(
 );
 
 function ExplorePage() {
-  const { data } = useSWR(`/datasets?filter=${QUERY_FILTER}`, datasetsFetcher);
-
-  const patients = new Map(
-    data.map(({ patient }) => [patient.number, patient])
+  const { data: datasets } = useSWR(
+    `/datasets?filter=${QUERY_FILTER}`,
+    datasetsFetcher
   );
 
   return (
     <Flex flexDirection="column" gap={[4, 4, 4, 5]} mb={7}>
       <Flex flexDirection={['column', 'column', 'row']} gap={[3, 3, 3, 4]}>
-        <Heading variant="display" width={['auto', 'auto', '15%']}>
+        <Heading variant="display" width={['auto', 'auto', '15%']} flex="none">
           Patients
         </Heading>
-        <PatientList patients={patients} />
+        <PatientList datasets={datasets} />
       </Flex>
       <Route path="/explore/:patientId">
         <Flex flexDirection={['column', 'column', 'row']} gap={[3, 3, 3, 4]}>
-          <Heading variant="display" width={['auto', 'auto', '15%']}>
+          <Heading
+            variant="display"
+            width={['auto', 'auto', '15%']}
+            flex="none"
+          >
             Organs
           </Heading>
-          <OrganList />
+          <OrganList datasets={datasets} />
         </Flex>
       </Route>
       <Route path="/explore/:patientId/:organ">
         <Flex flexDirection={['column', 'column', 'row']} gap={[3, 3, 3, 4]}>
-          <Heading variant="display" width={['auto', 'auto', '15%']}>
+          <Heading
+            variant="display"
+            width={['auto', 'auto', '15%']}
+            flex="none"
+          >
             Datasets
           </Heading>
-          <DatasetList />
+          <DatasetList datasets={datasets} />
         </Flex>
       </Route>
     </Flex>

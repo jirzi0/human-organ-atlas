@@ -4,6 +4,7 @@ import { translate } from 'search-api-adapter';
 import { useSWRInfinite } from 'swr';
 
 import Boundary from '../App/Boundary';
+import { datasetsFetcher } from '../App/SWRProvider';
 import Spinner from '../App/Spinner';
 import { useAppStore } from '../App/stores';
 import { Flex, Card, Text, Heading, Button, Box } from '../Primitives';
@@ -23,7 +24,7 @@ function DocumentList() {
   const { data, size, setSize } = useSWRInfinite((page, previous) => {
     const filter = translate(filters, { ...QUERY_CONFIG, page: page + 1 });
     return `/datasets?filter=${filter}`;
-  });
+  }, datasetsFetcher);
 
   // Infinite scroll
   const { ref: infiniteScrollRef, inView } = useInView();
@@ -47,8 +48,8 @@ function DocumentList() {
             </Card>
           ) : (
             <>
-              {datasets.map((doc) => (
-                <DocumentItem document={doc} key={doc.pid} />
+              {datasets.map((dataset) => (
+                <DocumentItem key={dataset.pid} {...dataset} />
               ))}
               {isLoadingMore ? (
                 <Text as="p">Loading more results...</Text>

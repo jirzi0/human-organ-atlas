@@ -2,10 +2,15 @@ import { useParams, NavLink as RouterLink } from 'react-router-dom';
 
 import { Box, Card, Heading, Image } from '../Primitives';
 
-const ORGANS = [{ name: 'lung' }, { name: 'brain' }, { name: 'heart' }];
-
-function OrganList() {
+function OrganList(props) {
+  const { datasets } = props;
   const { patientId } = useParams();
+
+  const organs = new Set(
+    datasets
+      .filter((d) => d.parameters.samplePatient.number === patientId)
+      .map((d) => d.parameters.samplePatient.organName)
+  );
 
   return (
     <Box
@@ -16,11 +21,11 @@ function OrganList() {
         gridTemplateColumns: 'repeat(auto-fill, 250px)',
       }}
     >
-      {ORGANS.map((organ) => (
+      {[...organs].map((organ) => (
         <Card
-          key={organ.name}
+          key={organ}
           as={RouterLink}
-          to={`/explore/${patientId}/${organ.name}`}
+          to={`/explore/${patientId}/${organ}`}
           variant="card"
           sx={{
             borderRadius: 4,
@@ -38,11 +43,11 @@ function OrganList() {
             },
           }}
         >
-          <Heading as="h4">{organ.name}</Heading>
+          <Heading as="h4">{organ}</Heading>
           <Image
             width="428"
             height="428"
-            src={`https://source.unsplash.com/random/428x428?${organ.name}`}
+            src={`https://source.unsplash.com/random/428x428?${organ}`}
             bg="secondary"
           />
         </Card>

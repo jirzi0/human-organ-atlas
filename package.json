@@ -23,6 +23,7 @@
     "@react-hookz/web": "^7.0.0",
     "@rebass/forms": "^4.0.6",
     "@styled-system/css": "^5.1.5",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "normalize.css": "^8.0.1",
     "rc-slider": "^9.7.2",
