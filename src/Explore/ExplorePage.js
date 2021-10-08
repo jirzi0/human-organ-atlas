@@ -11,7 +11,7 @@ import PatientList from './PatientList';
 
 const QUERY_FILTER = translate(
   {},
-  { include: [['instrument'], ['parameters']] }
+  { include: [['instrument'], ['parameters']], limit: 0 }
 );
 
 function ExplorePage() {

@@ -1,6 +1,6 @@
 [
   {
-    "target": ["datasets", "parameters"],
+    "target": ["parameters"],
     "filters": [
       {
         "name": "sex",
